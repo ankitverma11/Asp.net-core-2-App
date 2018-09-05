@@ -1,1 +1,0 @@
-https://dzone.com/articles/authentication-using-google-in-aspnet-core-20?fromrel=true
