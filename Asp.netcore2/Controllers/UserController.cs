@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Asp.netcore2.Filters;
 using Microsoft.Extensions.Logging;
+using Asp.netcore2.Models;
 
 namespace Asp.netcore2.Controllers
 {
@@ -19,6 +20,7 @@ namespace Asp.netcore2.Controllers
     public class UserController : Controller
     {
         private readonly ILogger _logger;
+        UserDataAccessLayer _dbcontext = new UserDataAccessLayer();
 
         public UserController (ILoggerFactory loggerFactory)
         {
@@ -36,6 +38,14 @@ namespace Asp.netcore2.Controllers
         {
             await HttpContext.SignOutAsync();
             return RedirectToAction("UserLogin", "Login");
+        }
+
+        [HttpGet]
+        public IEnumerable<Employee> GetEmployeeDetail()
+        {
+            List<Employee> emplist = new List<Employee>();
+            emplist = _dbcontext.GetEmployeeDetails().ToList(); ;
+            return emplist;
         }
     }
 }

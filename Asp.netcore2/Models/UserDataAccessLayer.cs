@@ -65,6 +65,31 @@ namespace Asp.netcore2.Models
             }
         }
 
+        public IEnumerable<Employee> GetEmployeeDetails()
+        {
+            string sqlQuery = "SELECT * FROM Employees";
+            List<Employee> listEmployee = new List<Employee>();
+            using (SqlConnection con = new SqlConnection(connectionstring))
+            {
+                SqlCommand cmd = new SqlCommand(sqlQuery, con);
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    Employee employee = new Employee();
+                    employee.ID = Convert.ToInt32(rdr["ID"]);
+                    employee.Name = rdr["Name"].ToString();
+                    employee.Position = rdr["Position"].ToString();
+                    employee.Office = rdr["Office"].ToString();
+                    employee.Age = Convert.ToInt32(rdr["Age"]);
+                    employee.Salary = rdr["Salary"].ToString();
+
+                    listEmployee.Add(employee);
+                }
+            }
+            return listEmployee;
+        }
+
 
     }
 }

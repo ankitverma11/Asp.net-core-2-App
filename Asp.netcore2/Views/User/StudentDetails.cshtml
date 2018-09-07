@@ -4,6 +4,12 @@
     ViewData["Title"] = "StudentDetails";
 }
 
+<ul class="nav navbar-right navbar-nav">
+    <li>
+        <a asp-action="LogOut">Logout</a>
+    </li>
+</ul>
+
 <h2>StudentDetails</h2>
 
 @if (student.GetAllStudentDetails().Any())
@@ -40,12 +46,12 @@
                     </td>
                     <td align="left" style="border: solid1px#659EC7; padding: 5px;table-layout:fixed;">
                         <span style="color:#9F000F">
-                            
+
                             @Html.DisplayFor(modelItem => stu.Subject2)
                     </td>
                     <td align="left" style="border: solid1px#659EC7; padding: 5px;table-layout:fixed;">
                         <span style="color:#9F000F">
-                            
+
                             @Html.DisplayFor(modelItem => stu.Grade)
                     </td>
                 </tr>
@@ -54,6 +60,60 @@
         </tbody>
 
     </table>
+
+
+    <body>
+        <div class="container py-4">
+            <h5 class="text-center">HOW TO RETRIEVE DATA FROM DATABASE IN THE  USING JQUERY</h5>
+            <div class="card">
+                <div class="card-header bg-primary text-uppercase text-white">
+                    <h5 class="card-title">Employee List</h5>
+                </div>
+                <div class="card-body">
+                    <input type="button" class="btn btn-outline-primary rounded-0" id="btnGetData" value="Load Employee List" />
+                </div>
+                <div id="updatePanel" style="padding:20px;">
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        //var apibaseurl = ""
+        $("#btnGetData").click(function () {
+            $.ajax({
+                url: "/User/GetEmployeeDetail",
+                type: "get",
+                contenttype: "application-json",
+                datatype: "json",
+                success: function (responce) {
+                    var $table = $('<table/>').addClass('dataTable table table-bordered table-striped');
+                    var $header = $('<thead/>').html('<tr><th>Name</th><th>Position</th><th>Office</th><th>Age</th><th>Salary</th></tr>');
+                    $table.append($header);
+                    $.each(responce, function (i, val) {
+                        var $row = $('<tr/>');
+                        $row.append($('<td/>').html(val.Name));
+                        $row.append($('<td/>').html(val.Position));
+                        $row.append($('<td/>').html(val.Office));
+                        $row.append($('<td/>').html(val.Age));
+                        $row.append($('<td/>').html(val.Salary));
+                        $table.append($row);
+
+                    });
+                    $('#updatePanel').html($table);
+                },
+                error: function (responce, textStatus, errorThrown) {
+                    alert(responce.status);
+
+                }
+
+            });
+
+        })
+
+    </script>
 
 }
 

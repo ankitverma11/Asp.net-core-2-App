@@ -60,7 +60,7 @@ using Asp.netcore2.Models;
             WriteLiteral("<ul class=\"nav navbar-nav navbar-right\">\r\n    <li>\r\n        ");
             EndContext();
             BeginContext(104, 35, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "58b72dbf0f0e4696836a119cd102334d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b070a15dba3a452bb651324da66cf170", async() => {
                 BeginContext(127, 8, true);
                 WriteLiteral("Sign Out");
                 EndContext();
